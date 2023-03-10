@@ -4,6 +4,15 @@
     <b-col sm="5" cols="12">
       <b-card class="">
         <b-card-text>
+          <b-alert
+            variant="danger"
+            dismissible
+            fade
+            :show="loginInvalid"
+            @dismissed="loginInvalid = false"
+          >
+            Invalid email or password
+          </b-alert>
           <validation-observer ref="observer" v-slot="{ handleSubmit }">
             <b-form @submit.stop.prevent="handleSubmit(authLogin)">
               <validation-provider
@@ -78,22 +87,48 @@
 <script lang="ts">
 import Vue from 'vue';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
-import { authLoginUseCase } from '~/app/modules/login/use-cases/AuthLogin';
+
 export default Vue.extend({
   components: {
     ValidationObserver,
     ValidationProvider
   },
+  props: {
+    showAlert: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    },
+    loadingButton: {
+      type: Boolean,
+      required: false,
+      default: () => false
+    }
+  },
   data() {
     return {
       loading: {
-        button: false as boolean
+        button: this.loadingButton
       },
       form: {
         email: undefined as string | undefined,
         password: undefined as string | undefined
-      }
+      },
+      loginInvalid: this.showAlert
     };
+  },
+  watch: {
+    showAlert(val) {
+      this.loginInvalid = val;
+    },
+    loginInvalid(val) {
+      if (val === false) {
+        this.$emit('close');
+      }
+    },
+    loadingButton(val) {
+      this.loading.button = val;
+    }
   },
   methods: {
     getValidationState({
@@ -103,27 +138,8 @@ export default Vue.extend({
     }) {
       return dirty || validated ? valid : null;
     },
-    async authLogin() {
-      this.loading.button = true;
-
-      if (this.form.email !== undefined && this.form.password !== undefined) {
-        const req = {
-          input: {
-            login: {
-              email: this.form.email,
-              password: this.form.password
-            }
-          }
-        };
-        this.loading.button = true;
-        const res = await authLoginUseCase.execute(req);
-        this.loading.button = false;
-        if (res.isLeft()) {
-          return alert('Login ou senha invalida!');
-        }
-        const token = res.value.getValue().accessToken;
-        this.$emit('getLogin', token);
-      }
+    authLogin() {
+      this.$emit('login', this.form);
     }
   }
 });

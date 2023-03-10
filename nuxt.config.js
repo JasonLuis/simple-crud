@@ -8,7 +8,8 @@ export default {
     pages: 'ui/pages',
     components: 'ui/core/components',
     assets: 'ui/core/assets',
-    layouts: 'ui/core/layouts'
+    layouts: 'ui/core/layouts',
+    store: 'ui/store'
   },
   head: {
     title: 'simple-crud',
@@ -42,11 +43,35 @@ export default {
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     ['@nuxtjs/dotenv', { path: './config' }]
   ],
 
   axios: {
-    baseURL: '/'
+    baseURL: 'https://sys-dev.searchandstay.com/api/admin/'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/login_json',
+            method: 'post',
+            propertyName: 'data.result.access_token'
+          },
+          user: {
+            url: '/house_rules',
+            method: 'get',
+            propertyName: null
+          }
+        }
+      }
+    },
+    redirect: {
+      home: '/list-items/',
+      login: '/'
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

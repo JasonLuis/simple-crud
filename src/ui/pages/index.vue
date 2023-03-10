@@ -1,6 +1,11 @@
 <template>
   <b-container class="vh-100">
-    <Login @getLogin="runPage" />
+    <Login
+      :show-alert="showAlert"
+      :loading-button="loadingButton"
+      @login="getLogin"
+      @close="showAlert = false"
+    />
   </b-container>
 </template>
 
@@ -14,15 +19,23 @@ export default Vue.extend({
       form: {
         email: undefined as string | undefined,
         password: undefined as string | undefined
-      }
+      },
+      loadingButton: false as boolean,
+      showAlert: false as boolean
     };
   },
   methods: {
-    runPage(token: string) {
-      this.$router.push({
-        path: `list-items`,
-        query: { token }
-      });
+    getLogin(form: { email: string; password: string }) {
+      this.loadingButton = true;
+      this.$auth
+        .loginWith('local', { data: { login: form } })
+        .then(() => {
+          this.loadingButton = false;
+        })
+        .catch(() => {
+          this.loadingButton = false;
+          this.showAlert = true;
+        });
     }
   }
 });
