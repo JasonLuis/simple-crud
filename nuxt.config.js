@@ -47,9 +47,7 @@ export default {
     ['@nuxtjs/dotenv', { path: './config' }]
   ],
 
-  axios: {
-    baseURL: 'https://sys-dev.searchandstay.com/api/admin/'
-  },
+  axios: {},
 
   auth: {
     cookie: false,
@@ -61,7 +59,7 @@ export default {
         },
         endpoints: {
           login: {
-            url: '/login_json',
+            url: `${process.env.API_URL}/login_json`,
             method: 'post',
             propertyName: 'data.result.access_token'
           },

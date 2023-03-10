@@ -19,7 +19,7 @@ export class LoginService implements ILoginService {
   async authLogin(
     dto: LoginServiceDTO.AuthLogin.Request
   ): Promise<LoginServiceDTO.AuthLogin.Response> {
-    const url = `https://sys-dev.searchandstay.com/api/admin/login_json`;
+    const url = `${process.env.API_URL}/login_json`;
 
     const body = { ...dto.input };
     const res: Response<LoginServiceDTO.AuthLogin.Response> =
