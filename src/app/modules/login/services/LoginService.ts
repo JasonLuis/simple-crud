@@ -27,6 +27,7 @@ export class LoginService implements ILoginService {
         url,
         body
       });
+
     return res.data;
   }
 }

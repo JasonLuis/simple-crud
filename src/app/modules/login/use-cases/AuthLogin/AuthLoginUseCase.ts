@@ -19,9 +19,11 @@ export class AuthLoginUseCase
   ): Promise<AuthLoginDTO.Response> {
     try {
       const call = await this.authLoginService.authLogin(dto);
+
       const res = {
         accessToken: call.data.result.access_token
       };
+
       return right(Result.ok(res));
     } catch (err) {
       return left(new AppError.UnexpectedError(err));
