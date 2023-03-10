@@ -17,7 +17,6 @@ export default Vue.extend({
     this.info.token = this.$auth.$storage.getUniversal(
       '_token.local'
     ) as string;
-    console.log(this.info.token);
   }
 });
 </script>
