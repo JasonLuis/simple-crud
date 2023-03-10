@@ -52,19 +52,20 @@ export default {
   },
 
   auth: {
+    cookie: false,
+    localStorage: false,
     strategies: {
       local: {
+        user: {
+          autoFetch: false
+        },
         endpoints: {
           login: {
             url: '/login_json',
             method: 'post',
             propertyName: 'data.result.access_token'
           },
-          user: {
-            url: '/house_rules',
-            method: 'get',
-            propertyName: null
-          }
+          user: false
         }
       }
     },
