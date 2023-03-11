@@ -7,6 +7,9 @@ export interface IHouseRuleService {
   getAllHouseRulesService(
     dto: HouseRuleServiceDTO.GetAllHouseRules.Request
   ): Promise<HouseRuleServiceDTO.GetAllHouseRules.Response>;
+  getHouseRuleById(
+    dto: HouseRuleServiceDTO.GetHouseRuleById.Request
+  ): Promise<HouseRuleServiceDTO.GetHouseRuleById.Response>;
 }
 
 export class HouseRuleService implements IHouseRuleService {
@@ -26,6 +29,24 @@ export class HouseRuleService implements IHouseRuleService {
     };
 
     const res: Response<HouseRuleServiceDTO.GetAllHouseRules.Response> =
+      await this.httpAdapter.get({
+        url,
+        headers
+      });
+
+    return res.data;
+  }
+
+  async getHouseRuleById(
+    dto: HouseRuleServiceDTO.GetHouseRuleById.Request
+  ): Promise<HouseRuleServiceDTO.GetHouseRuleById.Response> {
+    const url = `${process.env.API_URL}/house_rules/${dto.input.id}`;
+
+    const headers = {
+      Authorization: `${dto.token}`
+    };
+
+    const res: Response<HouseRuleServiceDTO.GetHouseRuleById.Response> =
       await this.httpAdapter.get({
         url,
         headers

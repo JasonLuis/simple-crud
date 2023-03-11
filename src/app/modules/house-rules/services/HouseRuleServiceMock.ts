@@ -44,4 +44,31 @@ export class HouseRuleServiceMock implements IHouseRuleService {
       }
     });
   }
+
+  async getHouseRuleById(
+    dto: HouseRuleServiceDTO.GetHouseRuleById.Request
+  ): Promise<HouseRuleServiceDTO.GetHouseRuleById.Response> {
+    const body: HouseRuleServiceDTO.GetHouseRuleById.Response = {
+      success: true,
+      data: {
+        id: 2,
+        name: 'No Pets',
+        active: 1,
+        order: 0
+      },
+      message: 'Entity retrieved successfully.'
+    };
+
+    return await new Promise((resolve, reject) => {
+      if (Helper.isNotDefined(dto.token)) {
+        return reject(new Error('Token is empty!'));
+      }
+
+      try {
+        setTimeout(() => resolve(body), 10);
+      } catch (err) {
+        return reject(err);
+      }
+    });
+  }
 }

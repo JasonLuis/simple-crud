@@ -3,7 +3,7 @@ import { GetAllHouseRulesUseCase } from './GetAllHouseRulesUsecase';
 import { houseRuleUseCase } from '.';
 import { ErrorCodeEnum } from '~/shared/enums/ErrorCodeEnum';
 
-describe('Use Case: GetAllHouseRules', () => {
+describe('Use Case: HouseRules/GetAllHouseRules', () => {
   test('GetAllHouseRules - Success', async () => {
     const req = {
       token: 'teste token'
