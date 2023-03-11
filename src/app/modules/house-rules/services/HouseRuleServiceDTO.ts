@@ -24,7 +24,7 @@ export namespace HouseRuleServiceDTO {
     }
   }
 
-  export namespace CreateHouseRules {
+  export namespace CreateHouseRule {
     export interface Request {
       token: string;
       input: {
@@ -35,6 +35,29 @@ export namespace HouseRuleServiceDTO {
       };
     }
 
+    export interface Response {
+      success: boolean;
+      data: {
+        id: number;
+        name: string;
+        active: number;
+        order?: number;
+      };
+      message: string;
+    }
+  }
+
+  export namespace UpdateHouseRule {
+    export interface Request {
+      token: string;
+      input: {
+        house_rules: {
+          id: number;
+          name: string;
+          active: number;
+        };
+      };
+    }
     export interface Response {
       success: boolean;
       data: {

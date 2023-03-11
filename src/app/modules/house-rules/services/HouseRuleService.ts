@@ -11,8 +11,11 @@ export interface IHouseRuleService {
     dto: HouseRuleServiceDTO.GetHouseRuleById.Request
   ): Promise<HouseRuleServiceDTO.GetHouseRuleById.Response>;
   createHouseRule(
-    dto: HouseRuleServiceDTO.CreateHouseRules.Request
-  ): Promise<HouseRuleServiceDTO.CreateHouseRules.Response>;
+    dto: HouseRuleServiceDTO.CreateHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.CreateHouseRule.Response>;
+  updateHouseRule(
+    dto: HouseRuleServiceDTO.UpdateHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.UpdateHouseRule.Response>;
 }
 
 export class HouseRuleService implements IHouseRuleService {
@@ -59,18 +62,45 @@ export class HouseRuleService implements IHouseRuleService {
   }
 
   async createHouseRule(
-    dto: HouseRuleServiceDTO.CreateHouseRules.Request
-  ): Promise<HouseRuleServiceDTO.CreateHouseRules.Response> {
-    const url = `${process.env.API_URL}/house_rules/`;
+    dto: HouseRuleServiceDTO.CreateHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.CreateHouseRule.Response> {
+    const url = `${process.env.API_URL}/house_rules`;
+
+    const headers = {
+      Authorization: `${dto.token}`
+    };
+    const body = {
+      ...dto.input
+    };
+
+    const res: Response<HouseRuleServiceDTO.CreateHouseRule.Response> =
+      await this.httpAdapter.post({
+        url,
+        headers,
+        body
+      });
+
+    return res.data;
+  }
+
+  async updateHouseRule(
+    dto: HouseRuleServiceDTO.UpdateHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.UpdateHouseRule.Response> {
+    const url = `${process.env.API_URL}/house_rules/${dto.input.house_rules.id}`;
 
     const headers = {
       Authorization: `${dto.token}`
     };
 
-    const res: Response<HouseRuleServiceDTO.CreateHouseRules.Response> =
+    const body = {
+      ...dto.input
+    };
+
+    const res: Response<HouseRuleServiceDTO.UpdateHouseRule.Response> =
       await this.httpAdapter.post({
         url,
-        headers
+        headers,
+        body
       });
 
     return res.data;

@@ -73,15 +73,42 @@ export class HouseRuleServiceMock implements IHouseRuleService {
   }
 
   async createHouseRule(
-    dto: HouseRuleServiceDTO.CreateHouseRules.Request
-  ): Promise<HouseRuleServiceDTO.CreateHouseRules.Response> {
-    const body: HouseRuleServiceDTO.CreateHouseRules.Response = {
+    dto: HouseRuleServiceDTO.CreateHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.CreateHouseRule.Response> {
+    const body: HouseRuleServiceDTO.CreateHouseRule.Response = {
       success: true,
       data: {
         id: 9,
         name: 'New House Rules',
         active: 1,
         order: undefined
+      },
+      message: 'Entity created successfully.'
+    };
+
+    return await new Promise((resolve, reject) => {
+      if (Helper.isNotDefined(dto.token)) {
+        return reject(new Error('Token is empty!'));
+      }
+
+      try {
+        setTimeout(() => resolve(body), 10);
+      } catch (err) {
+        return reject(err);
+      }
+    });
+  }
+
+  async updateHouseRule(
+    dto: HouseRuleServiceDTO.UpdateHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.UpdateHouseRule.Response> {
+    const body: HouseRuleServiceDTO.UpdateHouseRule.Response = {
+      success: true,
+      data: {
+        id: 9,
+        name: 'New House Rules',
+        active: 0,
+        order: 0
       },
       message: 'Entity created successfully.'
     };
