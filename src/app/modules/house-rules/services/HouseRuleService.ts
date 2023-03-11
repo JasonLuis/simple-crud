@@ -16,6 +16,9 @@ export interface IHouseRuleService {
   updateHouseRule(
     dto: HouseRuleServiceDTO.UpdateHouseRule.Request
   ): Promise<HouseRuleServiceDTO.UpdateHouseRule.Response>;
+  deleteHouseRule(
+    dto: HouseRuleServiceDTO.DeleteHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.DeleteHouseRule.Response>;
 }
 
 export class HouseRuleService implements IHouseRuleService {
@@ -97,10 +100,28 @@ export class HouseRuleService implements IHouseRuleService {
     };
 
     const res: Response<HouseRuleServiceDTO.UpdateHouseRule.Response> =
-      await this.httpAdapter.post({
+      await this.httpAdapter.put({
         url,
         headers,
         body
+      });
+
+    return res.data;
+  }
+
+  async deleteHouseRule(
+    dto: HouseRuleServiceDTO.DeleteHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.DeleteHouseRule.Response> {
+    const url = `${process.env.API_URL}/house_rules/${dto.input.id}`;
+
+    const headers = {
+      Authorization: `${dto.token}`
+    };
+
+    const res: Response<HouseRuleServiceDTO.DeleteHouseRule.Response> =
+      await this.httpAdapter.delete({
+        url,
+        headers
       });
 
     return res.data;

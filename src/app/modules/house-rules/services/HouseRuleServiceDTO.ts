@@ -69,4 +69,19 @@ export namespace HouseRuleServiceDTO {
       message: string;
     }
   }
+
+  export namespace DeleteHouseRule {
+    export interface Request {
+      token: string;
+      input: {
+        id: number;
+      };
+    }
+
+    export interface Response {
+      success: true;
+      data?: Array<unknown>;
+      message: string;
+    }
+  }
 }

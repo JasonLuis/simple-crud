@@ -125,4 +125,26 @@ export class HouseRuleServiceMock implements IHouseRuleService {
       }
     });
   }
+
+  async deleteHouseRule(
+    dto: HouseRuleServiceDTO.DeleteHouseRule.Request
+  ): Promise<HouseRuleServiceDTO.DeleteHouseRule.Response> {
+    const body: HouseRuleServiceDTO.DeleteHouseRule.Response = {
+      success: true,
+      data: [],
+      message: 'Entity created successfully.'
+    };
+
+    return await new Promise((resolve, reject) => {
+      if (Helper.isNotDefined(dto.token)) {
+        return reject(new Error('Token is empty!'));
+      }
+
+      try {
+        setTimeout(() => resolve(body), 10);
+      } catch (err) {
+        return reject(err);
+      }
+    });
+  }
 }
