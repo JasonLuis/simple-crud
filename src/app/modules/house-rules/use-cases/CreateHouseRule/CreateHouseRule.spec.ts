@@ -6,7 +6,7 @@ import { ErrorCodeEnum } from '~/shared/enums/ErrorCodeEnum';
 describe('Use Case: HouseRules/CreateHouseRuleUseCase', () => {
   beforeAll(() => {});
 
-  test('CreateHouseRules - Success', async () => {
+  test('CreateHouseRule - Success', async () => {
     const req = {
       token: 'test token',
       input: {
@@ -23,7 +23,7 @@ describe('Use Case: HouseRules/CreateHouseRuleUseCase', () => {
     expect(res.value.getValue()).toBeDefined();
   });
 
-  test('CreateHouseRules - Data not found error', async () => {
+  test('CreateHouseRule - Data not found error', async () => {
     const createHouseRuleMock = new HouseRuleServiceMock();
     const apiError = {
       code: 404,
@@ -63,7 +63,7 @@ describe('Use Case: HouseRules/CreateHouseRuleUseCase', () => {
     spy.mockRestore();
   });
 
-  test('CreateHouseRules - Bad Request Error', async () => {
+  test('CreateHouseRule - Bad Request Error', async () => {
     const createHouseRuleMock = new HouseRuleServiceMock();
     const apiError = {
       code: 400,
@@ -103,7 +103,7 @@ describe('Use Case: HouseRules/CreateHouseRuleUseCase', () => {
     spy.mockRestore();
   });
 
-  test('CreateHouseRules - Unexpected error', async () => {
+  test('CreateHouseRule - Unexpected error', async () => {
     const createHouseRuleMock = new HouseRuleServiceMock();
     const apiError = {
       code: 500,
