@@ -2,13 +2,16 @@ require('dotenv').config({ path: './config/.env' });
 
 export default {
   ssr: false,
+  loading: {
+    color: 'grey'
+  },
   target: 'static',
   srcDir: 'src/',
   dir: {
     pages: 'ui/pages',
     components: 'ui/core/components',
     assets: 'ui/core/assets',
-    layouts: 'ui/core/layouts',
+    layouts: 'ui/core/layout',
     store: 'ui/store'
   },
   head: {
@@ -46,6 +49,10 @@ export default {
     '@nuxtjs/auth',
     ['@nuxtjs/dotenv', { path: './config' }]
   ],
+
+  bootstrapVue: {
+    icons: true
+  },
 
   axios: {},
 
