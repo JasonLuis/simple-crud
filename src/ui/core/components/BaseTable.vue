@@ -18,12 +18,12 @@
         </div>
       </template>
       <template #cell(edit)="{ item }">
-        <b-button size="sm" variant="primary" @click="edit(item.id)">
+        <b-button size="sm" variant="primary" @click="editItem(item.id)">
           <b-icon icon="pencil-square" aria-label="Help"></b-icon>
         </b-button>
       </template>
       <template #cell(delete)="{ item }">
-        <b-button size="sm" variant="danger" @click="edit(item.id)">
+        <b-button size="sm" variant="danger" @click="deleteItem(item.id)">
           <b-icon icon="trash" aria-label="Help"></b-icon>
         </b-button>
       </template>
@@ -43,7 +43,7 @@ import Vue from 'vue';
 export default Vue.extend({
   props: {
     fields: {
-      type: Object,
+      type: Array,
       required: true
     },
     items: {
@@ -69,11 +69,11 @@ export default Vue.extend({
     }
   },
   methods: {
-    edit(id: number) {
-      return id;
+    editItem(id: number) {
+      return this.$emit('edit', id);
     },
-    delete(id: number) {
-      return id;
+    deleteItem(id: number) {
+      return this.$emit('delete', id);
     }
   }
 });

@@ -75,7 +75,7 @@ export default {
       }
     },
     redirect: {
-      home: '/list-items/',
+      home: '/list-items',
       login: '/'
     }
   },
