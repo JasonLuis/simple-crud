@@ -14,7 +14,7 @@
     </div>
     <modal-confirm-delete
       :show="modalConfirmDelete"
-      @closed="closedModalConfirmDelete"
+      @closed="modalConfirmDelete = false"
       @confirm="deleteHouseRulesById"
     />
   </b-container>
@@ -106,10 +106,6 @@ export default Vue.extend({
     },
     showModalConfirmDelete() {
       this.modalConfirmDelete = true;
-    },
-    closedModalConfirmDelete() {
-      this.idDelete = undefined;
-      this.modalConfirmDelete = false;
     },
     getIdByDelete(id: number) {
       this.idDelete = id;
