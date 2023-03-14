@@ -73,7 +73,7 @@
                   block
                   variant="primary"
                 >
-                  Submit
+                  Login
                 </b-button>
               </b-overlay>
             </b-form>
