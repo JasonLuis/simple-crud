@@ -95,8 +95,14 @@ export class HouseRuleService implements IHouseRuleService {
       Authorization: `${dto.token}`
     };
 
+    const input = {
+      house_rules: {
+        name: dto.input.house_rules.name,
+        active: dto.input.house_rules.active
+      }
+    };
     const body = {
-      ...dto.input
+      ...input
     };
 
     const res: Response<HouseRuleServiceDTO.UpdateHouseRule.Response> =

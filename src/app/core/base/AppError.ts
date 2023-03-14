@@ -8,7 +8,7 @@ export namespace AppError {
     public constructor(err: any) {
       super(false, {
         code: ErrorCodeEnum.UnexpectedError,
-        message: 'generic_error',
+        message: 'Some error happenned.',
         details: err?.response?.data,
         httpCode: err?.status,
         error: err
