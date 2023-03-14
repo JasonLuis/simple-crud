@@ -17,6 +17,9 @@
           <strong>Loading...</strong>
         </div>
       </template>
+      <template #cell(active)="{ item }">
+        {{ item.active === 1 ? 'Yes' : 'No' }}
+      </template>
       <template #cell(edit)="{ item }">
         <b-button size="sm" variant="primary" @click="editItem(item.id)">
           <b-icon icon="pencil-square" aria-label="Help"></b-icon>

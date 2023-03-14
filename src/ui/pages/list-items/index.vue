@@ -73,19 +73,19 @@ export default Vue.extend({
         },
         {
           key: 'name',
-          label: 'name',
+          label: 'Name',
           thClass: 'text-center',
           tdClass: ['text-center', 'align-middle']
         },
         {
           key: 'active',
-          label: 'active',
+          label: 'Active',
           thClass: 'text-center',
           tdClass: ['text-center', 'align-middle']
         },
         {
           key: 'order',
-          label: 'order',
+          label: 'Order',
           thClass: 'text-center',
           tdClass: ['text-center', 'align-middle']
         },
