@@ -1,4 +1,2 @@
-EMAIL=
-PASSWORD=
-API_URL=
-MOCK=
+API_URL=link_api
+MOCK=false
